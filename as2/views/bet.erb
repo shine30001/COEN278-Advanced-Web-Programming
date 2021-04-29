@@ -1,0 +1,32 @@
+<html>
+ <head>
+ </head>
+ <body>
+<% if session[:message] %>
+ <h3><%= session[:message] %>
+ <% session[:message] = nil%>
+
+ <% end %>
+
+ <h1>Gambling Site</h1>
+ <form action="/gambling" method='post'>
+bet money <input type='number' min = "1" name='betmoney'></input><br><br>
+on <input type='number' min = "1" max = "6" name='dicenumber'></input>
+<br><br>
+<input type='submit' name='login' value="bet"></input>
+ </form>
+<div id = "sidebar-wrapper">
+	<h1>This Session:</h1>
+	<p>Total win: <%= session[:win] %></p>
+	<p>Total loss: <%= session[:loss] %></p>
+	<p>Total profit: <%= session[:profit] %></p>
+</div>
+<div id = "page-content-wrapper">
+	<p>Total win: <%= session[:totalwin] %></p>
+	<p>Total loss: <%= session[:totalloss] %></p>
+	<p>Total profit: <%= session[:totalprofit] %></p>
+</div>
+</body>
+<br>
+<a href="/logout"> log out</a>
+</html>
