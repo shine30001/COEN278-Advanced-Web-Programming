@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Onlinestore</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="<%= controller.controller_name%>">
+	<div id="banner">
+		<%= @page_title || "Our Products"%>
+	</div>
+	
+	<div id="columns">
+		<div id="side">
+			<div id="cart">
+				<% if @cart && !['products', 'admin', 'access', 'users'].include?(controller.controller_name) %>
+                <%= render @cart %>
+                <% end %>
+			</div>
+			<% if session[:user_id] %>
+				<ul>
+					<li><%= link_to 'Shoppings', shopper_path %></li>
+					<li><%= link_to 'Orders', orders_path %></li>
+					<li><%= link_to 'Products', products_path %></li>
+					<li><%= link_to 'Users', users_path %></li>
+				</ul>
+				<%= button_to 'Logout', logout_path, method: :delete %>
+			<% end %>
+		</div>
+		<div id="main">
+			<%= yield %>
+		</div>
+	</div>
+  </body>
+</html>
